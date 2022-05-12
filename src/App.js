@@ -1,18 +1,22 @@
-import logo from './logo.svg';
+import logo from './images/logo.svg';
+import pen from './images/pen.svg';
+import profilePicture from './images/profile_pic.jpg';
+import plusSign from './images/plus-sign.svg';
+
 import './App.css';
 
 function App() {
   return (
   <div className="page">
     <header className="header">
-        <img className="logo" alt="logo" src="<%=require('./images/logo.svg')% >" />
+        <img className="logo" alt="logo" src={logo} />
     </header>
     <main className="content">
         <div className="profile">
             <div className="profile__picture-container">
-                <img className="profile__picture" src="<%=require('./images/profile_pic.jpg')%>" alt="picture of jacque cousteau" />
+                <img className="profile__picture" src={profilePicture} alt="jacque cousteau" />
                 <div className="profile__picture-overlay">
-                    <img src="<%=require('./images/pen.svg')%>" alt="pen icon" className="profile__picture-icon" />
+                    <img src={pen} alt="pen icon" className="profile__picture-icon" />
                 </div>
             </div>
             <div className="profile__content">
@@ -22,7 +26,7 @@ function App() {
                 </div>
                 <p className="profile__function"></p>
             </div>
-            <button type="button" className="profile__button-add-place"><img src="<%=require('./images/plus-sign.svg')%>" alt="plus sign symbol" className="profile__plus-sign" /></button>
+            <button type="button" className="profile__button-add-place"><img src={plusSign} alt="plus sign symbol" className="profile__plus-sign" /></button>
         </div>
         <section>
             <ul className="places">
