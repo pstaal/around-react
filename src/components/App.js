@@ -32,16 +32,23 @@ function App() {
         setOpenPicture(true);
     }
 
+    function closeAllPopups() {
+        setOpenAvatar(false);
+        setOpenProfile(false);
+        setOpenPlace(false);
+        setOpenPicture(false);
+    }
+
 
   return (
   <div className="page">
     <Header />
     <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick} onCardClick={handlePictureClick}/>
     <Footer />
-    <PopupProfile isOpen={openProfile}/>
-    <PopupPlace isOpen={openPlace}/>
-    <PopupAvatar isOpen={openAvatar}/>
-    <PopupImage isOpen={openPicture}/>
+    <PopupProfile isOpen={openProfile} onClose={closeAllPopups}/>
+    <PopupPlace isOpen={openPlace} onClose={closeAllPopups}/>
+    <PopupAvatar isOpen={openAvatar} onClose={closeAllPopups}/>
+    <PopupImage isOpen={openPicture} onClose={closeAllPopups}/>
     <PopupConfirmation />
     
         
