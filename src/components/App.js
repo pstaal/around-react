@@ -9,6 +9,7 @@ import PopupPlace from './PopupPlace';
 import PopupImage from './PopupImage';
 import React from 'react';
 
+
 function App() {
 
     const [openAvatar, setOpenAvatar] = React.useState(false);
@@ -50,6 +51,7 @@ function App() {
     <PopupAvatar isOpen={openAvatar} onClose={closeAllPopups}/>
     <PopupImage isOpen={openPicture} onClose={closeAllPopups}/>
     <PopupConfirmation />
+   
     
         
     
