@@ -4,7 +4,6 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupProfile from './PopupProfile';
 import PopupAvatar from './PopupAvatar';
-import PopupConfirmation from './PopupConfirmation';
 import PopupPlace from './PopupPlace';
 import ImagePopup from './ImagePopup';
 import React from 'react';
@@ -12,21 +11,21 @@ import React from 'react';
 
 function App() {
 
-    const [openAvatar, setOpenAvatar] = React.useState(false);
-    const [openProfile, setOpenProfile] = React.useState(false);
-    const [openPlace, setOpenPlace] = React.useState(false);
+    const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+    const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false); 
+    const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState({isOpen: false, link: '', title: ''});
 
     function handleEditAvatarClick() {
-        setOpenAvatar(true);
+        setIsEditAvatarPopupOpen(true);
     }
 
     function handleEditProfileClick() {
-        setOpenProfile(true);
+        setIsEditProfilePopupOpen(true);
     }
 
     function handleAddPlaceClick() {
-        setOpenPlace(true);
+        setIsAddPlacePopupOpen(true);
     }
 
     function handleCardClick({isOpen, link, title}) {
@@ -34,9 +33,9 @@ function App() {
     }
  
     function closeAllPopups() {
-        setOpenAvatar(false);
-        setOpenProfile(false);
-        setOpenPlace(false);
+        setIsEditAvatarPopupOpen(false);
+        setIsEditProfilePopupOpen(false);
+        setIsAddPlacePopupOpen(false);
         setSelectedCard({isOpen: false, link: '', title: ''});
     }
 
@@ -46,29 +45,12 @@ function App() {
     <Header />
     <Main onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
     <Footer />
-    <PopupProfile isOpen={openProfile} onClose={closeAllPopups}/>
-    <PopupPlace isOpen={openPlace} onClose={closeAllPopups}/>
-    <PopupAvatar isOpen={openAvatar} onClose={closeAllPopups}/>
+    <PopupProfile isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+    <PopupPlace isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
+    <PopupAvatar isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
     <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-    <PopupConfirmation />
-   
-    
-        
-    
-    <template id="card-template">
-        <li className="places__card">
-            <img src="<%=require('./images/Trash.svg')%>" alt="trashcan icon" className="places__card-delete-icon" />
-            <img className="places__card-image" />
-            <div className="places__card-content">
-                <h2 className="places__card-title"></h2>
-                <div className="places__like">
-                    <button type="button" className="places__card-button"></button>
-                    <p className="places__likes-counter"></p>
-                </div>
-            </div>
-        </li>
-    </template>
-</div>
+  </div>
+
   );
 }
 

@@ -18,10 +18,14 @@ function Main(props) {
             setUserName(data.name);
             setUserDescription(data.about);
             setUserAvatar(data.avatar);
+        }).catch((err) => {
+            console.log(err); // log the error to the console
         });
 
         api.getInitialCards().then((data) => {
             setCards([...cards, ...data]);
+        }).catch((err) => {
+            console.log(err); // log the error to the console
         });
 
     },[]);
