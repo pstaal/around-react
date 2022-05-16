@@ -6,7 +6,7 @@ import PopupProfile from './PopupProfile';
 import PopupAvatar from './PopupAvatar';
 import PopupConfirmation from './PopupConfirmation';
 import PopupPlace from './PopupPlace';
-import PopupImage from './PopupImage';
+import ImagePopup from './ImagePopup';
 import React from 'react';
 
 
@@ -49,7 +49,7 @@ function App() {
     <PopupProfile isOpen={openProfile} onClose={closeAllPopups}/>
     <PopupPlace isOpen={openPlace} onClose={closeAllPopups}/>
     <PopupAvatar isOpen={openAvatar} onClose={closeAllPopups}/>
-    <PopupImage card={selectedCard} onClose={closeAllPopups}/>
+    <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     <PopupConfirmation />
    
     
