@@ -15,7 +15,7 @@ function App() {
     const [openAvatar, setOpenAvatar] = React.useState(false);
     const [openProfile, setOpenProfile] = React.useState(false);
     const [openPlace, setOpenPlace] = React.useState(false);
-    const [openPicture, setOpenPicture] = React.useState(false);
+    const [selectedCard, setSelectedCard] = React.useState({isOpen: false, link: '', title: ''});
 
     function handleEditAvatarClick() {
         setOpenAvatar(true);
@@ -29,27 +29,27 @@ function App() {
         setOpenPlace(true);
     }
 
-    function handlePictureClick() {
-        setOpenPicture(true);
+    function handleCardClick({isOpen, link, title}) {
+        setSelectedCard({isOpen, link, title});
     }
-
+ 
     function closeAllPopups() {
         setOpenAvatar(false);
         setOpenProfile(false);
         setOpenPlace(false);
-        setOpenPicture(false);
+        setSelectedCard({isOpen: false, link: '', title: ''});
     }
 
 
   return (
   <div className="page">
     <Header />
-    <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick} onCardClick={handlePictureClick}/>
+    <Main onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
     <Footer />
     <PopupProfile isOpen={openProfile} onClose={closeAllPopups}/>
     <PopupPlace isOpen={openPlace} onClose={closeAllPopups}/>
     <PopupAvatar isOpen={openAvatar} onClose={closeAllPopups}/>
-    <PopupImage isOpen={openPicture} onClose={closeAllPopups}/>
+    <PopupImage card={selectedCard} onClose={closeAllPopups}/>
     <PopupConfirmation />
    
     
