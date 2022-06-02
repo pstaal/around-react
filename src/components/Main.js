@@ -19,8 +19,19 @@ function Main(props) {
         // Send a request to the API and getting the updated card data
         api.toggleLike(card._id, isLiked).then((newCard) => {
             setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+        }).catch((err) => {
+            console.log(err); // log the error to the console
         });
     };
+
+    function handleCardDelete(id) {
+        api.deleteCard(id).then((res) => {
+            setCards(cards.filter(card => card._id !== id));
+            console.log(res);
+        }).catch((err) => {
+            console.log(err); // log the error to the console
+        });
+    }
 
 
     React.useEffect(() => {
@@ -51,7 +62,7 @@ function Main(props) {
         </div>
         <section>
             <ul className="places">
-            {cards.map((card) => <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike}/>)}
+            {cards.map((card) => <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>)}
             </ul>
         </section>
     </main>
