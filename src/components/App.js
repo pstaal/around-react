@@ -51,6 +51,14 @@ function App() {
         setSelectedCard({isOpen: false, link: '', title: ''});
     }
 
+    function handleUpdateUser(user) {
+        api.setNewUser(user).then((data) => {
+            setCurrentUser(data);
+        }).catch((err) => {
+            console.log(err); // log the error to the console
+        });
+    }
+
 
   return (
   <div className="page">
@@ -58,7 +66,7 @@ function App() {
         <Header />
         <Main onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
         <Footer />
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <PopupPlace isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
         <PopupAvatar isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
         <ImagePopup card={selectedCard} onClose={closeAllPopups}/>

@@ -25,8 +25,19 @@ function EditProfilePopup(props) {
         setDescription(e.target.value);
     }
 
+    function handleSubmit(e) {
+        // Prevent the browser from navigating to the form address
+        e.preventDefault();
+      
+        // Pass the values of the managed components to the external handler
+        props.onUpdateUser({
+          userName: name,
+          userJob: description
+        });
+      } 
+
     return (
-        <PopupWithForm name="profile" title="Edit profile" isOpen={props.isOpen} onClose={props.onClose}>
+        <PopupWithForm name="profile" title="Edit profile" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
                     <input id="name-input" onChange={handleNameChange} minLength="2" value={name} maxLength="40" required placeholder="name" name="userName" className="popup__input" type="text" />
                     <span className="name-input-error popup__input-error"></span>
                     <input id="function-input" onChange={handleDescriptionChange} minLength="2" value={description} maxLength="200" required placeholder="function" name="userJob" className="popup__input" type="text" />
