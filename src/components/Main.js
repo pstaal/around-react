@@ -12,6 +12,16 @@ function Main(props) {
 
     const currentUser = React.useContext(CurrentUserContext);
 
+    function handleCardLike(card) {
+        // Check one more time if this card was already liked
+        const isLiked = card.likes.some(user => user._id === currentUser._id);
+        
+        // Send a request to the API and getting the updated card data
+        api.toggleLike(card._id, isLiked).then((newCard) => {
+            setCards((state) => state.map((currentCard) => currentCard._id === card._id ? newCard : currentCard));
+        });
+    };
+
 
     React.useEffect(() => {
         api.getInitialCards().then((data) => {
@@ -41,7 +51,7 @@ function Main(props) {
         </div>
         <section>
             <ul className="places">
-            {cards.map((card) => <Card card={card} key={card._id} onCardClick={props.onCardClick}/>)}
+            {cards.map((card) => <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike}/>)}
             </ul>
         </section>
     </main>

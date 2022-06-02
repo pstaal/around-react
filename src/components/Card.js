@@ -10,6 +10,10 @@ function Card(props) {
         props.onCardClick({isOpen: true, title: props.card.name, link: props.card.link});
       }  
     
+      function handleLikeClick() {
+        props.onCardLike(props.card);
+      }
+    
         // Checking if the current user is the owner of the current card
         const isOwn = props.card.owner._id === currentUser._id;
 
@@ -31,7 +35,7 @@ function Card(props) {
             <div className="places__card-content">
                 <h2 className="places__card-title">{props.card.name}</h2>
                 <div className="places__like">
-                    <button type="button" className={cardLikeButtonClassName}></button>
+                    <button type="button" className={cardLikeButtonClassName} onClick={handleLikeClick}></button>
                     <p className="places__likes-counter">{props.card.likes.length}</p>
                 </div>
             </div>
