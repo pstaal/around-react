@@ -2,7 +2,7 @@ import '../App.css';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupProfile from './PopupProfile';
+import EditProfilePopup from './EditProfilePopup';
 import PopupAvatar from './PopupAvatar';
 import PopupPlace from './PopupPlace';
 import ImagePopup from './ImagePopup';
@@ -58,7 +58,7 @@ function App() {
         <Header />
         <Main onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
         <Footer />
-        <PopupProfile isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
         <PopupPlace isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
         <PopupAvatar isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
         <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
