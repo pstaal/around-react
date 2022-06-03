@@ -3,7 +3,7 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
-import PopupAvatar from './PopupAvatar';
+import EditAvatarPopup from './EditAvatarPopup';
 import PopupPlace from './PopupPlace';
 import ImagePopup from './ImagePopup';
 import React from 'react';
@@ -59,6 +59,14 @@ function App() {
         });
     }
 
+    function handleUpdateAvatar(avatarObject) {
+        api.changePicture(avatarObject).then((data) => {
+            setCurrentUser(data); 
+        }).catch((err) => {
+            console.log(err); // log the error to the console
+        });
+    }
+
 
   return (
   <div className="page">
@@ -68,7 +76,7 @@ function App() {
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <PopupPlace isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
-        <PopupAvatar isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
         <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </CurrentUserContext.Provider>
   </div>
