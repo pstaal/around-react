@@ -34,6 +34,9 @@ function EditProfilePopup(props) {
           userName: name,
           userJob: description
         });
+
+       props.onClose();
+
       } 
 
     return (
