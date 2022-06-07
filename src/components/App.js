@@ -4,7 +4,7 @@ import Main from './Main';
 import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
-import PopupPlace from './PopupPlace';
+import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import React from 'react';
 import { api } from '../utils/api';
@@ -43,6 +43,15 @@ function App() {
         }).catch((err) => {
             console.log(err); // log the error to the console
         });
+    }
+
+    function handleAddPlaceSubmit(cardObject){
+        api.addCart(cardObject).then((newCard) => {
+            setCards([newCard, ...cards]); 
+        }).catch((err) => {
+            console.log(err); // log the error to the console
+        });
+
     }
 
     function handleCardLike(card) {
@@ -105,7 +114,7 @@ function App() {
         <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
-        <PopupPlace isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlaceSubmit={handleAddPlaceSubmit}/>
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
         <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </CurrentUserContext.Provider>
