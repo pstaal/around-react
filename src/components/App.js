@@ -6,6 +6,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
+import ConfirmDeletePopup from './ConfirmDeletePopup';
 import React from 'react';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
@@ -16,9 +17,11 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false); 
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] = React.useState(false);
     const [selectedCard, setSelectedCard] = React.useState({isOpen: false, link: '', title: ''});
     const [currentUser, setCurrentUser] = React.useState('');
     const [cards, setCards] = React.useState([]);
+    const [selectedCardId, setSelectedCardId] = React.useState(null);
 
 
     React.useEffect(() => {
@@ -36,10 +39,11 @@ function App() {
 
     },[]);
 
-    function handleCardDelete(id) {
-        api.deleteCard(id).then((res) => {
-            setCards(cards.filter(card => card._id !== id));
-            console.log(res);
+    function handleCardDelete(CardId) {
+        api.deleteCard(CardId).then((res) => {
+            setCards(cards.filter(card => card._id !== CardId));
+            setSelectedCardId(null);
+            closeAllPopups();
         }).catch((err) => {
             console.log(err); // log the error to the console
         });
@@ -82,11 +86,17 @@ function App() {
     function handleCardClick({isOpen, link, title}) {
         setSelectedCard({isOpen, link, title});
     }
+
+    function handleConfirmation(cardId) {
+        setIsConfirmDeletePopupOpen(true);
+        setSelectedCardId(cardId);
+    }
  
     function closeAllPopups() {
         setIsEditAvatarPopupOpen(false);
         setIsEditProfilePopupOpen(false);
         setIsAddPlacePopupOpen(false);
+        setIsConfirmDeletePopupOpen(false);
         setSelectedCard({isOpen: false, link: '', title: ''});
     }
 
@@ -111,12 +121,13 @@ function App() {
   <div className="page">
     <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
+        <Main cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete} onConfirm={handleConfirmation} onCardClick={handleCardClick} onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarClick}/>
         <Footer />
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
         <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlaceSubmit={handleAddPlaceSubmit}/>
         <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
         <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+        <ConfirmDeletePopup isOpen={isConfirmDeletePopupOpen} cardId={selectedCardId} onClose={closeAllPopups} onDelete={handleCardDelete}/>
     </CurrentUserContext.Provider>
   </div>
 

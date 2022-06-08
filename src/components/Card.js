@@ -13,10 +13,7 @@ function Card(props) {
       function handleLikeClick() {
         props.onCardLike(props.card);
       }
-    
-      function handleDeleteClick() {
-            props.onCardDelete(props.card._id);
-      }
+
         // Checking if the current user is the owner of the current card
         const isOwn = props.card.owner._id === currentUser._id;
 
@@ -33,7 +30,7 @@ function Card(props) {
 
     return (
         <li className="places__card">
-            <img src={trashCan} alt="trashcan icon" className={cardDeleteButtonClassName} onClick={handleDeleteClick}/>
+            <img src={trashCan} alt="trashcan icon" className={cardDeleteButtonClassName} onClick={() => props.onConfirm(props.card._id)}/>
             <img className="places__card-image" src={props.card.link} alt={props.card.name} onClick={handleClick}/>
             <div className="places__card-content">
                 <h2 className="places__card-title">{props.card.name}</h2>

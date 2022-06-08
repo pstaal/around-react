@@ -31,7 +31,7 @@ function Main(props) {
         </div>
         <section>
             <ul className="places">
-            {props.cards.map((card) => <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onCardDelete={props.onCardDelete}/>)}
+            {props.cards.map((card) => <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={props.onCardLike} onConfirm={props.onConfirm}/>)}
             </ul>
         </section>
     </main>
