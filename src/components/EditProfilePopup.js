@@ -23,13 +23,19 @@ function EditProfilePopup(props) {
     function handleNameChange(e) {
         setName(e.target.value);
         setIsNameValid(e.target.validity.valid);
-        setErrorMessage({name: e.target.validationMessage});
+        setErrorMessage((state) => ({
+            ...state,
+            name: e.target.validationMessage
+        }));
     };
 
     function handleDescriptionChange(e) {
         setDescription(e.target.value);
         setIsDescriptionValid(e.target.validity.valid);
-        setErrorMessage({description: e.target.validationMessage});
+        setErrorMessage((state) => ({
+            ...state,
+            description: e.target.validationMessage
+        }));
     }
 
     function handleSubmit(e) {

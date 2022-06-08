@@ -11,13 +11,19 @@ function AddPlacePopup(props) {
     function handleLinkChange(e) {
         setLink(e.target.value);
         setIsLinkValid(e.target.validity.valid);
-        setErrorMessage({link: e.target.validationMessage});
+        setErrorMessage((state) => ({
+            ...state,
+            link: e.target.validationMessage
+        }));
     }
 
     function handleTitleChange(e) {
         setTitle(e.target.value);
         setIsTitleValid(e.target.validity.valid);
-        setErrorMessage({title: e.target.validationMessage});
+        setErrorMessage((state) => ({
+            ...state,
+            title: e.target.validationMessage
+        }));
     }
     
 
