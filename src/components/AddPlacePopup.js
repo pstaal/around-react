@@ -4,13 +4,20 @@ import React from "react";
 function AddPlacePopup(props) {
     const [title, setTitle ] = React.useState('');
     const [link, setLink ] = React.useState('');
+    const [isTitleValid, setIsTitleValid] = React.useState(false);
+    const [isLinkValid, setIsLinkValid] = React.useState(false);
+    const [errorMessage, setErrorMessage ] = React.useState({title: '', link: ''});
 
     function handleLinkChange(e) {
         setLink(e.target.value);
-    };
+        setIsLinkValid(e.target.validity.valid);
+        setErrorMessage({link: e.target.validationMessage});
+    }
 
     function handleTitleChange(e) {
         setTitle(e.target.value);
+        setIsTitleValid(e.target.validity.valid);
+        setErrorMessage({title: e.target.validationMessage});
     }
     
 
@@ -26,11 +33,11 @@ function AddPlacePopup(props) {
       } 
 
      return (
-         <PopupWithForm name="place" title="New place" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
-                    <input value={title} onChange={handleTitleChange} id="title-input" minLength="1" maxLength="30" required placeholder="Title" name="title" className="popup__input" type="text" />
-                    <span className="title-input-error popup__input-error"></span>
-                    <input value={link} onChange={handleLinkChange} id="link-input" required placeholder="Image URL" name="link" className="popup__input" type="url" />
-                    <span className="link-input-error popup__input-error"></span>
+         <PopupWithForm activeButton={isTitleValid && isLinkValid} name="place" title="New place" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit}>
+                    <input value={title} onChange={handleTitleChange} id="title-input" minLength="1" maxLength="30" required placeholder="Title" name="title" className={`popup__input ${isTitleValid ? '' : 'popup__input_type_error'}`}  type="text" />
+                    <span className={`title-input-error popup__input-error ${isTitleValid ? '' : 'popup__error_visible'}`}>{errorMessage.title}</span>
+                    <input value={link} onChange={handleLinkChange} id="link-input" required placeholder="Image URL" name="link" className={`popup__input ${isLinkValid ? '' : 'popup__input_type_error'}`}  type="url" />
+                    <span className={`link-input-error popup__input-error ${isLinkValid ? '' : 'popup__error_visible'}`}>{errorMessage.link}</span>
          </PopupWithForm>
      )
 
