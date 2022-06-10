@@ -88,7 +88,7 @@ class Api {
 };
 
 //initalize api instance
-export const api = new Api({
+export default api = new Api({
     baseUrl: "https://around.nomoreparties.co/v1/group-12",
     headers: {
       authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435",

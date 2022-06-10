@@ -2,7 +2,6 @@ import pen from '../images/pen.svg';
 import plusSign from '../images/plus-sign.svg';
 import React from 'react';
 import Card from './Card';
-import { api } from '../utils/api';
 import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
 

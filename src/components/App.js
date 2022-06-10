@@ -8,7 +8,7 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import React from 'react';
-import { api } from '../utils/api';
+import api from '../utils/api';
 import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
 
