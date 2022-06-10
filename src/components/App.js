@@ -8,17 +8,10 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import ConfirmDeletePopup from './ConfirmDeletePopup';
 import React from 'react';
-import Api from '../utils/api';
+import api from '../utils/api';
 import { CurrentUserContext } from '../../src/contexts/CurrentUserContext';
 
-//initalize api instance
-const api = new Api({
-    baseUrl: "https://around.nomoreparties.co/v1/group-12",
-    headers: {
-      authorization: "5ad7ef92-ff2d-4fbe-9e41-f5034926c435",
-      "Content-Type": "application/json"
-    }
-  }); 
+
 
 
 function App() {
